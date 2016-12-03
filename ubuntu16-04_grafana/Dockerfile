@@ -16,7 +16,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 			vim \
     && apt-get clean \
     && cd /tmp \
-    && VERSION=4.0.0-1480439068_amd64 \
+    && VERSION=4.0.1-1480694114_amd64 \
     && wget https://grafanarel.s3.amazonaws.com/builds/grafana_$VERSION.deb \
     && dpkg -i grafana_$VERSION.deb \
     && grafana-cli plugins install jdbranham-diagram-panel \
