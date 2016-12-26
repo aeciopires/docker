@@ -2,7 +2,7 @@
 #     This Dockerfile generate image from repositoriy 
 #     https://hub.docker.com/r/aeciopires/ubuntu-grafana/
 #----
-#Version  0.0.2
+#Version  0.0.3
 
 FROM ubuntu:16.04
 
@@ -11,13 +11,15 @@ LABEL Description="This image is used to start Grafana"
 
 ADD run.sh /opt/run.sh
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN apt-get update \
+    && apt-get -y upgrade \
+    && apt-get install -y --no-install-recommends \
 			libfontconfig \
 			wget \
+			gosu \
 			ca-certificates \
 			net-tools \
 			apt-utils \
-			vim \
     && apt-get clean \
     && cd /tmp \
     && VERSION=4.0.2-1481203731_amd64 \
