@@ -4,13 +4,12 @@
 FROM ubuntu:16.04
 
 MAINTAINER Aecio Pires http://blog.aeciopires.com
-LABEL Description="This image is used to start Grafana" Version="3.0"
+LABEL Description="This image is used to start Grafana" Version="4.0.2"
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
 			adduser \
 			libfontconfig \
 			wget \
-			openssh-server \
 			ca-certificates \
 			net-tools \
 			apt-utils \
@@ -27,7 +26,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && grafana-cli plugins install grafana-clock-panel \
     && grafana-cli plugins install grafana-piechart-panel
 
-CMD ["service", "ssh", "start"]
 CMD ["service", "grafana-server", "restart"]
 
 EXPOSE 3000
