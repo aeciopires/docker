@@ -1,13 +1,17 @@
-#This Dockerfile generate image from repositoriy https://hub.docker.com/r/aeciopires/ubuntu16-04_grafana/
+#----
+#     This Dockerfile generate image from repositoriy 
+#     https://hub.docker.com/r/aeciopires/ubuntu-grafana/
+#----
 #Version  0.0.2
 
 FROM ubuntu:16.04
 
 MAINTAINER Aecio Pires http://blog.aeciopires.com
-LABEL Description="This image is used to start Grafana" Version="4.0.2"
+LABEL Description="This image is used to start Grafana"
+
+ADD run.sh /opt/run.sh
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-			adduser \
 			libfontconfig \
 			wget \
 			ca-certificates \
@@ -24,8 +28,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && grafana-cli plugins install briangann-gauge-panel \
     && grafana-cli plugins install alexanderzobnin-zabbix-app \
     && grafana-cli plugins install grafana-clock-panel \
-    && grafana-cli plugins install grafana-piechart-panel
+    && grafana-cli plugins install grafana-piechart-panel \
+    && chmod +x /opt/*.sh
 
-CMD ["service", "grafana-server", "restart"]
+CMD ["/opt/run.sh"]
 
 EXPOSE 3000
