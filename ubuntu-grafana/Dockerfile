@@ -2,7 +2,7 @@
 #     This Dockerfile generate image from repositoriy 
 #     https://hub.docker.com/r/aeciopires/ubuntu-grafana/
 #----
-#Version  0.0.3
+#Version  0.0.4
 
 FROM ubuntu:16.04
 
@@ -22,8 +22,8 @@ RUN apt-get update \
 			apt-utils \
     && apt-get clean \
     && cd /tmp \
-    && VERSION=4.0.2-1481203731_amd64 \
-    && wget --no-check-certificate https://grafanarel.s3.amazonaws.com/builds/grafana_$VERSION.deb \
+    && VERSION=4.2.0_amd64 \
+    && wget --no-check-certificate https://s3-us-west-2.amazonaws.com/grafana-releases/release/grafana_$VERSION.deb \
     && dpkg -i grafana_$VERSION.deb \
     && service grafana-server restart \
     && grafana-cli plugins install jdbranham-diagram-panel \
