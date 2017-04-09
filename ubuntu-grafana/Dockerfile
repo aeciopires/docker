@@ -33,6 +33,7 @@ RUN apt-get update \
     && grafana-cli plugins install grafana-piechart-panel \
     && chmod +x /opt/*.sh
 
-CMD ["/opt/run.sh"]
+#CMD ["/opt/run.sh"]
+ENTRYPOINT ["/opt/run.sh"]
 
 EXPOSE 3000
