@@ -1,16 +1,26 @@
-#----
-#     This Dockerfile generate image from repositoriy 
-#     https://hub.docker.com/r/aeciopires/ubuntu-grafana/
-#----
-#Version  0.0.4
-
+#Imagem base
 FROM ubuntu:16.04
 
-MAINTAINER Aecio Pires http://blog.aeciopires.com
-LABEL Description="This image is used to start Grafana"
+#Informacoes sobre a imagem
+LABEL mantenedor="Aécio Pires" \
+      autor="Aécio Pires" \
+      email="http://blog.aeciopires.com/contato/" \
+      data_criacao="09/04/2017" \
+      versao="1.0.0" \
+      descricao="Especifica a imagem disponivel em https://hub.docker.com/r/aeciopires/ubuntu-grafana/" \
+      licenca="copyright"
 
+#Declaracao de variaveis
+ARG grafana_version="4.4.2"
+ARG grafana_package=grafana_${grafana_version}_amd64.deb
+ARG grafana_download_url_base="https://s3-us-west-2.amazonaws.com/grafana-releases/release"
+ARG grafana_download=${grafana_download_url_base}/${grafana_package}
+ARG grafana_port=3000
+
+#Adicionando o script de inicializacao do Grafana
 ADD run.sh /opt/run.sh
 
+#Instalando as dependencias e o Grafana
 RUN apt-get update \
     && apt-get -y upgrade \
     && apt-get install -y --no-install-recommends \
@@ -22,9 +32,8 @@ RUN apt-get update \
 			apt-utils \
     && apt-get clean \
     && cd /tmp \
-    && VERSION=4.2.0_amd64 \
-    && wget --no-check-certificate https://s3-us-west-2.amazonaws.com/grafana-releases/release/grafana_$VERSION.deb \
-    && dpkg -i grafana_$VERSION.deb \
+    && wget --no-check-certificate ${grafana_download} -O /tmp/${grafana_package} \
+    && dpkg -i /tmp/${grafana_package} \
     && service grafana-server restart \
     && grafana-cli plugins install jdbranham-diagram-panel \
     && grafana-cli plugins install briangann-gauge-panel \
@@ -33,7 +42,9 @@ RUN apt-get update \
     && grafana-cli plugins install grafana-piechart-panel \
     && chmod +x /opt/*.sh
 
-#CMD ["/opt/run.sh"]
+#Expondo a porta do Grafana
+EXPOSE ${grafana_port}
+
+#Executando o script de inicializacao do Grafana
 ENTRYPOINT ["/opt/run.sh"]
 
-EXPOSE 3000
