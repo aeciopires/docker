@@ -29,6 +29,6 @@ Senha: admin
 
 ```sh
 cd docker_compose/
-docker-compose down
+docker-compose -f docker-compose_grafana.yml down
 ```
 
