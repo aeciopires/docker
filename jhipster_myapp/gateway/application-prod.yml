@@ -2,9 +2,15 @@ eureka:
     instance:
         prefer-ip-address: true
         ip-address: 172.17.0.1
-#    client:
-#        service-url:
-#            defaultZone: http://admin:admin@172.17.0.1:8761/eureka/
+    client:
+        service-url:
+            defaultZone: http://admin:admin@172.17.0.1:8761/eureka/
+
+jhipster:
+    security:
+        authentication:
+            jwt:
+                secret: caf914d5d29c725e502654f407cc87d4be6d26ca
 
 spring:
     datasource:

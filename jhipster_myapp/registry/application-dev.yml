@@ -14,6 +14,11 @@ spring:
 jhipster:
     registry:
         password: admin
+    security:
+        authentication:
+            jwt:
+                secret: caf914d5d29c725e502654f407cc87d4be6d26ca
+
 
 security:
     user:

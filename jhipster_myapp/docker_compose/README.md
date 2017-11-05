@@ -6,7 +6,7 @@ Realize as configurações prévias citadas [aqui](../README.md).
 
 # Instruções para baixar e iniciar o Docker Compose
 
-Para instalar o Docker Compose na versão 1.16.1, por exemplo, use os
+Para instalar o Docker Compose na versão 1.17.0, por exemplo, use os
 comandos a seguir.
 
 ```sh
