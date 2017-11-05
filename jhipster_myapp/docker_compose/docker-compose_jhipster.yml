@@ -1,0 +1,31 @@
+version: '3.3'
+volumes:
+    db_data:
+services:
+  mysql:
+    image: mysql
+    volumes:
+      - db_data:/var/lib/mysql
+#    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root_mysql
+      MYSQL_DATABASE: gateway
+      MYSQL_USER: jhipster
+      MYSQL_PASSWORD: jhipster
+    ports:
+     - "3306:3306"
+  gateway:
+    build: ../gateway/
+#      args:
+#        - GATEWAY_VERSION=0.0.1
+    ports:
+     - "8084:8084"
+    depends_on:
+      - "mysql"
+      - "registry"
+  registry:
+    build: ../registry/
+#      args:
+#        - REGISTRY_VERSION=3.2.3
+    ports:
+      - "8761:8761"

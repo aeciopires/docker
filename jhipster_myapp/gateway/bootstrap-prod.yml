@@ -1,0 +1,4 @@
+spring:
+    cloud:
+        config:
+            uri: http://admin:admin@172.17.0.1:8761/config

@@ -1,0 +1,21 @@
+server:
+    port: 8761
+
+eureka:
+    instance:
+        nonSecurePort: 8761
+
+spring:
+    application:
+        name: jhipster-registry
+    profiles:
+        active: prod,native
+
+jhipster:
+    registry:
+        password: admin
+
+security:
+    user:
+        name: admin
+        password: admin
