@@ -20,7 +20,7 @@ ARG GATEWAY_VERSION
 ENV GATEWAY_VERSION ${GATEWAY_VERSION:-0.0.1}
 
 #Variaveis locais
-ARG gateway_port=8084
+ARG gateway_port=8080
 ARG gateway_download_url="http://puppet.aeciopires.com/files/jhipster-sample-application/"
 ARG gateway_source_file=jhipster-sample-application-${GATEWAY_VERSION}.war
 ARG gateway_app_file=jhipster-gateway.war

@@ -19,7 +19,7 @@ services:
 #      args:
 #        - GATEWAY_VERSION=0.0.1
     ports:
-     - "8084:8084"
+     - "8080:8080"
     depends_on:
       - "mysql"
       - "registry"

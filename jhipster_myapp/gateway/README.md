@@ -19,7 +19,7 @@ docker build  -t jhipster_myapp/gateway:0.0.1 .
 Use o comando a seguir para iniciar um conteiner do JHipster-Gateway.
 
 ```sh
-docker run -d -p 8084:8084 --name jhipster-gateway -e APP_PROFILE="prod" jhipster_myapp/gateway:0.0.1
+docker run -d -p 8080:8080 --name jhipster-gateway -e APP_PROFILE="prod" jhipster_myapp/gateway:0.0.1
 ```
 
 ## Visualize o log do microserviço.
@@ -34,4 +34,4 @@ docker logs -f jhipster-gateway
 docker rm -f jhipster-gateway
 ```
 
-Acesse o JHipster-Gateway na URl http://localhost:8084 ou http://IP-DOCKER_HOST:8084
+Acesse o JHipster-Gateway na URl http://localhost:8080 ou http://IP-DOCKER_HOST:8080
