@@ -10,13 +10,13 @@ git clone https://github.com/aeciopires/docker
 
 ```sh
 cd ubuntu-grafana
-docker build  -t aeciopires/ubuntu-grafana:4.4.2 .
+docker build  -t aeciopires/ubuntu-grafana:7.0.4 .
 ```
 
 ## Inicie o conteiner.
 
 ```sh
-docker run -i -t -p 3000:3000 --name grafana aeciopires/ubuntu-grafana:4.4.2 /bin/bash
+docker run -i -t -p 3000:3000 --name grafana aeciopires/ubuntu-grafana:7.0.4 /bin/bash
 ```
 
 ## Caso o Grafana nao inicie automaticamente, inicie-o dentro do conteiner.

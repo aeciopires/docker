@@ -1,26 +1,25 @@
-#Imagem base
-FROM ubuntu:16.04
+FROM ubuntu:20.04
+# Imagem base
 
-#Informacoes sobre a imagem
-LABEL mantenedor="Aécio Pires" \
-      autor="Aécio Pires" \
+# Informacoes sobre a imagem
+LABEL maintainer="Aécio Pires" \
       email="http://blog.aeciopires.com/contato/" \
-      data_criacao="09/04/2017" \
-      versao="1.0.0" \
-      descricao="Especifica a imagem disponivel em https://hub.docker.com/r/aeciopires/ubuntu-grafana/" \
-      licenca="copyright"
+      date_create="09/04/2017" \
+      version="1.1.0" \
+      description="Especifica a imagem disponível em https://hub.docker.com/r/aeciopires/ubuntu-grafana/" \
+      licensce="copyright"
 
-#Declaracao de variaveis
-ARG grafana_version="4.4.2"
+# Declaracao de variaveis
+ARG grafana_version="7.0.4"
 ARG grafana_package=grafana_${grafana_version}_amd64.deb
-ARG grafana_download_url_base="https://s3-us-west-2.amazonaws.com/grafana-releases/release"
+ARG grafana_download_url_base="https://dl.grafana.com/oss/release"
 ARG grafana_download=${grafana_download_url_base}/${grafana_package}
 ARG grafana_port=3000
 
-#Adicionando o script de inicializacao do Grafana
+# Adicionando o script de inicializacao do Grafana
 ADD run.sh /opt/run.sh
 
-#Instalando as dependencias e o Grafana
+# Instalando as dependencias e o Grafana
 RUN apt-get update \
     && apt-get -y upgrade \
     && apt-get install -y --no-install-recommends \
@@ -42,9 +41,9 @@ RUN apt-get update \
     && grafana-cli plugins install grafana-piechart-panel \
     && chmod +x /opt/*.sh
 
-#Expondo a porta do Grafana
+# Expondo a porta do Grafana
 EXPOSE ${grafana_port}
 
-#Executando o script de inicializacao do Grafana
+# Executando o script de inicializacao do Grafana
 ENTRYPOINT ["/opt/run.sh"]
 
