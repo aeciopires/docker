@@ -16,7 +16,7 @@ docker build  -t aeciopires/ubuntu-grafana:v7 .
 Inicie o contêiner.
 
 ```sh
-docker run -i -t -p 3000:3000 --name grafana aeciopires/ubuntu-grafana:7.0.4 /bin/bash
+docker run -i -t -p 3000:3000 --name grafana aeciopires/ubuntu-grafana:v7 /bin/bash
 ```
 
 Caso o Grafana não inicie automaticamente, inicie-o dentro do conteiner.
