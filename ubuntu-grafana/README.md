@@ -1,40 +1,108 @@
-# Instruções para baixar e compilar a imagem Docker do Grafana
+# What is Grafana?
 
-Baixe o código do repositório Git.
+Grafana allows you to query, visualize, alert on and understand your metrics no matter where they are stored. Create, explore, and share beautiful dashboards with your team and foster a data driven culture.
 
-```sh
-git clone https://github.com/aeciopires/docker
+The easiest way to get started is with Grafana Cloud, our fully composable observability stack.
+
+# What's in this image?
+
+* operating system: **Ubuntu 22.04 LTS 64 bits**
+
+* Packages:
+  * ca-certificates
+  * apt-utils
+  * net-tools
+  * gosu
+  * wget
+  * libfontconfig
+  * Grafana
+
+View Dockerfile: https://github.com/aeciopires/docker/blob/master/ubuntu-grafana
+
+More information install Grafana: [http://docs.grafana.org/installation/debian/](http://docs.grafana.org/installation/debian/)
+
+# How to access Grafana?
+
+* URL: **http://localhost:3000** or **http://ip-container:3000**
+* login: **admin**
+* password: **admin**
+
+# Grafana details
+
+* Installs binary to **/usr/sbin/grafana-server**
+* Installs Init.d script to **/etc/init.d/grafana-server**
+* Creates default file (environment vars) to **/etc/default/grafana-server**
+* Installs configuration file to **/etc/grafana/grafana.ini**
+* The default configuration sets the log file at **/var/log/grafana/grafana.log**
+* The default configuration specifies an sqlite3 db at **/var/lib/grafana/grafana.db**
+
+# How to use image
+
+1) Create a conteiner:
+
+a) In background:
+
+```bash
+docker container run -p 3000:3000 -d --rm --name grafana aeciopires/ubuntu-grafana:v9
 ```
 
-Compile a imagem Docker .
+or
 
-```sh
-cd ubuntu-grafana
-docker build  -t aeciopires/ubuntu-grafana:v7 .
+b) Interactive:
+
+```bash
+docker container run -p 3000:3000 -i -t --rm --name grafana aeciopires/ubuntu-grafana:v9 /bin/bash
 ```
 
-Inicie o contêiner.
+2) Get logs of container:
 
-```sh
-docker run -i -t -p 3000:3000 --name grafana aeciopires/ubuntu-grafana:v7 /bin/bash
+```bash
+docker container logs -f grafana
 ```
 
-Caso o Grafana não inicie automaticamente, inicie-o dentro do conteiner.
+# How to update the image?
 
-```sh
-service grafana-server start
+1) Clone the git repository:
+
+```bash
+git clone git@github.com:aeciopires/docker.git
+cd docker/ubuntu-grafana/
 ```
 
-Verifique se o processo do Grafana foi iniciado.
+2) Generate new image:
 
-```sh
-ps aux | grep grafana
+```bash
+docker image build -t aeciopires/ubuntu-grafana:v9 .
 ```
 
-Acesso ao serviço
+3) List images.
 
-Acesse o serviço no navegador usando as informações abaixo.
+```bash
+docker image ls
+```
 
-* URL: http://localhost:3000 
-* Login: admin 
-* Password: admin
+4) Send image for https://hub.docker.com:
+
+```bash
+docker login -u aeciopires
+```
+
+5) Push image:
+
+```bash
+docker push aeciopires/ubuntu-grafana:v9
+```
+
+6) Commit changes in git repository:
+
+```bash
+git add *
+git commit -m "MESSAGE"
+git push
+```
+
+Reference:
+
+* https://docs.docker.com/engine/tutorials/dockerimages/
+* https://docs.docker.com/engine/reference/commandline/commit/
+* https://www.digitalocean.com/community/tutorials/docker-explained-how-to-create-docker-containers-running-memcached

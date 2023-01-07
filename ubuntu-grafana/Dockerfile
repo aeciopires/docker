@@ -1,49 +1,49 @@
-FROM ubuntu:20.04
-# Imagem base
+FROM ubuntu:22.04
+# Base image
 
-# Informacoes sobre a imagem
+# Information about the image
 LABEL maintainer="Aécio Pires" \
       email="http://blog.aeciopires.com/contato/" \
-      date_create="09/04/2017" \
-      version="1.1.0" \
-      description="Especifica a imagem disponível em https://hub.docker.com/r/aeciopires/ubuntu-grafana/" \
+      date_create="07/01/2023" \
+      version="1.2.0" \
+      description="Docker image custom of Grafana available in https://hub.docker.com/r/aeciopires/ubuntu-grafana/" \
       licensce="copyright"
 
-# Declaracao de variaveis
-ARG grafana_version="7.0.4"
-ARG grafana_package=grafana_${grafana_version}_amd64.deb
+# Variables
+ARG grafana_version="9.3.2"
+ARG grafana_package="grafana_${grafana_version}_amd64.deb"
 ARG grafana_download_url_base="https://dl.grafana.com/oss/release"
-ARG grafana_download=${grafana_download_url_base}/${grafana_package}
-ARG grafana_port=3000
+ARG grafana_download="${grafana_download_url_base}/${grafana_package}"
+ARG grafana_port="3000"
 
-# Adicionando o script de inicializacao do Grafana
+# Adding the Grafana Startup Script
 ADD run.sh /opt/run.sh
 
-# Instalando as dependencias e o Grafana
-RUN apt-get update \
-    && apt-get -y upgrade \
-    && apt-get install -y --no-install-recommends \
-			libfontconfig \
-			wget \
-			gosu \
-			ca-certificates \
-			net-tools \
-			apt-utils \
-    && apt-get clean \
+# Installing dependencies and Grafana
+RUN apt update \
+    && apt -y upgrade \
+    && apt install -y --no-install-recommends \
+        libfontconfig \
+        wget \
+        gosu \
+        ca-certificates \
+        net-tools \
+        apt-utils \
+        adduser \
+    && apt clean \
     && cd /tmp \
     && wget --no-check-certificate ${grafana_download} -O /tmp/${grafana_package} \
     && dpkg -i /tmp/${grafana_package} \
-    && service grafana-server restart \
+    && update-rc.d grafana-server defaults 95 10 \
     && grafana-cli plugins install jdbranham-diagram-panel \
     && grafana-cli plugins install briangann-gauge-panel \
     && grafana-cli plugins install alexanderzobnin-zabbix-app \
     && grafana-cli plugins install grafana-clock-panel \
-    && grafana-cli plugins install grafana-piechart-panel \
+    && grafana-cli plugins install digrich-bubblechart-panel \
     && chmod +x /opt/*.sh
 
-# Expondo a porta do Grafana
+# Exposing the Grafana port
 EXPOSE ${grafana_port}
 
-# Executando o script de inicializacao do Grafana
+# Running the Grafana startup script
 ENTRYPOINT ["/opt/run.sh"]
-
