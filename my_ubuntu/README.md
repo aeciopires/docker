@@ -4,35 +4,33 @@ A imagem está disponível na URL a seguir.
 
 https://hub.docker.com/r/aeciopires/my_ubuntu/
 
-O My_Ubuntu é o Ubuntu customizado a partir da imagem base da versão 16.04.
+O My_Ubuntu é o Ubuntu customizado a partir da imagem base da versão 24.04.
 
 A imagem providencia os seguintes pacotes.
 
-* JAVA da Oracle
-* Vim
-* Git
-* Wget
+* openjdk
+* golang
+* vim
+* nano
+* wget
+* NTP Client
+* ping
+* curl
 
 ## Como usar a imagem?
 
-* Baixe a imagem do DockerHub:
+* Crie um contêiner com uma das formas abaixo.
+
+a) contêiner em background:
 
 ```sh
-docker pull aeciopires/my_ubuntu:16.04
+docker container run -d --name=my_ubuntu aeciopires/my_ubuntu:24.04
 ```
 
-* Crie um conteiner com uma das formas abaixo.
-
-a) Conteiner em background:
+b) contêiner interativo:
 
 ```sh
-docker run -d --name=my_ubuntu aeciopires/my_ubuntu:16.04
-```
-
-b) Conteiner interativo:
-
-```sh
-docker run -i -t --name=my_ubuntu aeciopires/my_ubuntu:16.04 /bin/bash
+docker container run -i -t --name=my_ubuntu aeciopires/my_ubuntu:24.04
 ```
 
 ## Compile a imagem Docker a partir do DockerFile.
@@ -45,7 +43,7 @@ git clone https://github.com/aeciopires/docker
 
 ```sh
 cd docker/my_ubuntu/
-docker build -t aeciopires/my_ubuntu:16.04 .
+docker build -t aeciopires/my_ubuntu:24.04 .
 ```
 
 ## Referências:
