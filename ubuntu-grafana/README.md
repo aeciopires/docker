@@ -6,7 +6,7 @@ The easiest way to get started is with Grafana Cloud, our fully composable obser
 
 # What's in this image?
 
-* operating system: **Ubuntu 22.04 LTS 64 bits**
+* operating system: **Ubuntu 24.04 LTS 64 bits**
 
 * Packages:
   * ca-certificates
@@ -43,7 +43,7 @@ More information install Grafana: [http://docs.grafana.org/installation/debian/]
 a) In background:
 
 ```bash
-docker container run -p 3000:3000 -d --rm --name grafana aeciopires/ubuntu-grafana:v9
+docker container run -p 3000:3000 -d --rm --name grafana aeciopires/ubuntu-grafana:v11
 ```
 
 or
@@ -51,7 +51,7 @@ or
 b) Interactive:
 
 ```bash
-docker container run -p 3000:3000 -i -t --rm --name grafana aeciopires/ubuntu-grafana:v9 /bin/bash
+docker container run -p 3000:3000 -i -t --rm --name grafana aeciopires/ubuntu-grafana:v11 /bin/bash
 ```
 
 2) Get logs of container:
@@ -72,7 +72,7 @@ cd docker/ubuntu-grafana/
 2) Generate new image:
 
 ```bash
-docker image build -t aeciopires/ubuntu-grafana:v9 .
+docker image build -t aeciopires/ubuntu-grafana:v11 .
 ```
 
 3) List images.
@@ -90,7 +90,7 @@ docker login -u aeciopires
 5) Push image:
 
 ```bash
-docker push aeciopires/ubuntu-grafana:v9
+docker push aeciopires/ubuntu-grafana:v11
 ```
 
 6) Commit changes in git repository:
